@@ -8,29 +8,8 @@ require __DIR__ . '/../vendor/autoload.php';
 // Create App
 $app = AppFactory::create();
 
-//$app->addRoutingMiddleware();
+require_once __DIR__ . ('\..\src\rutas.php');
 
-// Create Twig
-//$twig = Twig::create('./../templates', ['cache' => './../cache']);
-$twig = Twig::create('./../templates');
-// Add Twig-View Middleware
-$app->add(TwigMiddleware::create($app, $twig));
-
-// Define named route
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    $view = Twig::fromRequest($request);
-    $saludo=array("a"=>"alfa","b"=>"bravo");
-    return $view->render($response, 'base.twig',["data"=>$saludo]);
-});
-$app->get('/login', function ($request, $response, $args) {
-    $view = Twig::fromRequest($request);
-  
-    return $view->render($response, 'login.twig');
-});
-
-
-
-// Run app
 $app->run();
 
 ?>
